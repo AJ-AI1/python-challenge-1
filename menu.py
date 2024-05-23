@@ -134,8 +134,10 @@ while place_order:
                 if menu_selection not in menu_items.keys():
                     print("An error occurred: Name does not exist")
                 else:
+
                     # Store the item name as a variable
-                    item_name = "Soda - Large"
+                    item_name = menu_items[menu_selection]["item"]
+                    item_price = menu_items[menu_selection]["price"]
 
                     # Ask the customer for the quantity of the menu item
                     quantity = input("what quantity of the menu item do you want? ")
@@ -147,9 +149,11 @@ while place_order:
                     else:
                         print(1)
                     # Add the item name, price, and quantity to the order list
-                    order_list.append({'Item name': item_name, 'Price': 2.99, 'Quantity': quantity})
+                    order_list.append({'Item name': item_name, 'Prices': item_price, 'Quantity': quantity}) 
+                    
                     # Tell the customer that their input isn't valid
-                    print("invalid input")
+                    if not quantity:
+                        print("invalid input")
 
                 # Tell the customer they didn't select a menu option
 
@@ -200,16 +204,35 @@ print("--------------------------|--------|----------")
 
 # 6. Loop through the items in the customer's order
 
-    # 7. Store the dictionary items as variables
+for item in order_list:
+    item_name = item["item_name"]
+    price = item["item_price"]
+    quantity = item["quantity"]
 
+    print(f"{item_name} | ${item_price} | {quantity}")
+
+    # 7. Store the dictionary items as variables
+    menu_dict = {
+        "item_name": "item_name",
+        "price": "item_price",
+        "quantity": "quantity"
+    }
+
+    item_name = menu_dict[item_name] 
+    price = menu_dict[price] 
+    quantity = menu_dict["quantity"] 
 
     # 8. Calculate the number of spaces for formatted printing
-
+    print("-" *40)
 
     # 9. Create space strings
-
+num_spaces = 8
+space_string = " " * num_spaces
 
     # 10. Print the item name, price, and quantity
+print(item_name)
+print(price)
+print(quantity)
 
 
 # 11. Calculate the cost of the order using list comprehension
