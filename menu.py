@@ -119,13 +119,13 @@ while place_order:
                     }
                     i += 1
             # 2. Ask customer to input menu item number
-                menu_selection = input("which menu item number do you want? ")
+            menu_selection = input("which menu item number do you want? ")
 
             # 3. Check if the customer typed a number
-                if not menu_selection.isdigit():
-                     print("An error occurred: Please try again and select the menu item number. ")
-                else:
-                     print("Menu selected")
+            if not menu_selection.isdigit():
+                print("An error occurred: Please try again and select the menu item number. ")
+            else:
+                print("Menu selected")
                 
                 # Convert the menu selection to an integer
                 menu_selection = int(menu_selection)
@@ -136,18 +136,18 @@ while place_order:
                 else:
 
                     # Store the item name as a variable
-                    item_name = menu_items[menu_selection]["item"]
-                    item_price = menu_items[menu_selection]["price"]
+                    item_name = menu_items[menu_selection]["Item name"]
+                    item_price = menu_items[menu_selection]["Price"]
 
                     # Ask the customer for the quantity of the menu item
                     quantity = input("what quantity of the menu item do you want? ")
 
                     # Check if the quantity is a number, default to 1 if not
-                    if quantity.isdigit():
-                        number = int(quantity)
+                    if not quantity.isdigit():
+                        quantity = 1
                         print("We are preparing your order")
                     else:
-                        print(1)
+                        quantity = int(quantity)
                     # Add the item name, price, and quantity to the order list
                     order_list.append({'Item name': item_name, 'Prices': item_price, 'Quantity': quantity}) 
                     
@@ -205,37 +205,26 @@ print("--------------------------|--------|----------")
 # 6. Loop through the items in the customer's order
 
 for item in order_list:
-    item_name = item["item_name"]
-    price = item["item_price"]
-    quantity = item["quantity"]
-
-    print(f"{item_name} | ${item_price} | {quantity}")
+    
 
     # 7. Store the dictionary items as variables
-    menu_dict = {
-        "item_name": "item_name",
-        "price": "item_price",
-        "quantity": "quantity"
-    }
-
-    item_name = menu_dict[item_name] 
-    price = menu_dict[price] 
-    quantity = menu_dict["quantity"] 
+    item_name = item["Item name"]
+    price = item["Prices"]
+    quantity = item["Quantity"]
 
     # 8. Calculate the number of spaces for formatted printing
-    print("-" *40)
+    num_item_spaces = 26 - len(item_name)
+    num_price_spaces = 6 - len(str(price))
 
     # 9. Create space strings
-num_spaces = 8
-space_string = " " * num_spaces
+    item_spaces = " " * num_item_spaces
+    price_spaces = " " * num_price_spaces
 
     # 10. Print the item name, price, and quantity
-print(item_name)
-print(price)
-print(quantity)
+    print(f"{item_name}{item_spaces}| ${price}{price_spaces}| {quantity}")
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
-order_cost = sum([price * quantity])
+order_cost = sum([item["Prices"]* item["Quantity"] for item in order_list])
 print(order_cost)
